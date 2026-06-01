@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from .views import ProductReviewListAPIview
 
 urlpatterns = [
     path('categories/', CategoryListAPIView.as_view()),
@@ -10,4 +10,11 @@ urlpatterns = [
 
     path('reviews/', ReviewListAPIView.as_view()),
     path('reviews/<int:id>/', ReviewDetailAPIView.as_view()),
-]
+    path('products/reviews',
+         ProductReviewListAPIview.as_view(),
+         name='products-reviews'
+
+         
+
+    ),
+] 

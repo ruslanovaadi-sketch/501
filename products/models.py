@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 
 class Category(models.Model):
@@ -29,6 +31,15 @@ class Review(models.Model):
         on_delete=models.CASCADE,
         related_name='reviews'
     )
+    
+    text = models.TextField()
+
+    stars = models.PositiveSmallIntegerField(
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5)
+        ]
+    ) 
 
     def __str__(self):
         return self.text[:20]
