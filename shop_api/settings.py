@@ -73,6 +73,10 @@ WSGI_APPLICATION = 'shop_api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+from pathlib import Path
+import os
+from dotenv import load_dotenv
+
 
 DATABASES = {
     'default': {
