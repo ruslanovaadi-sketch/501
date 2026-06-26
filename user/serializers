@@ -69,4 +69,14 @@ class ConfirmUserSerializer(serializers.Serializer):
 
         confirmation.delete()
 
+       
         return {"status": "user confirmed"}
+    
+class UserSerializers(serializers.ModelSerializer):
+    phone = serializers.CharField(required=True)
+
+
+    class Meta:
+        model = User
+        fields = "__all__"    
+        
