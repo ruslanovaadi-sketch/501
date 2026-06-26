@@ -1,11 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.db import models
-import random
+from django.contrib.auth.models import AbstractUser,PermissionsMixin
+
+from users.managers import CustomUserManager
 
 
-class User(AbstractUser):
+class CustomUser(AbstractUser,PermissionsMixin):
+    email = models.EmailField(unique=True)
+    is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)  # пользователь неактивен при регистрации
+
+    objects=CustomUserManager
+
+    REQUIRED_FIELDS = []
+    USERNAME_FIELD = "email"
+
+    def __str__(self):
+        return self.email or ""
+
 
 
 class UserConfirmation(models.Model):
