@@ -72,11 +72,27 @@ class ConfirmUserSerializer(serializers.Serializer):
        
         return {"status": "user confirmed"}
     
-class UserSerializers(serializers.ModelSerializer):
-    phone = serializers.CharField(required=True)
 
+
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = "__all__"    
-        
+        fields = (
+            "email",
+            "phone_number",
+            "password",
+        )
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)  
+
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+    phone_number = models.CharField(
+    max_length=20,
+    blank=True,
+)        
