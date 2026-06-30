@@ -8,6 +8,8 @@ from .serializers import (
     ProductSerializer,
     ReviewSerializer
 )
+from .permissions import IsModerator
+
 
 
 class CategoryListAPIView(generics.ListAPIView):
@@ -76,3 +78,9 @@ class ReviewCreateView(generics.ListCreateAPIView):
 class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+
+class ProductListCreateView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes =[IsModerator]    
